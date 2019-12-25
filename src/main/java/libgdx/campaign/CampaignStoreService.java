@@ -10,7 +10,7 @@ public class CampaignStoreService {
 
     private static final String CAMPAIGN_LEVEL = "CampaignLevel";
     private static final String PREF_NAME = "campaignStoreService";
-    public static final String QUESTION_SPLIT = "#";
+    public static final String TEXT_SPLIT = "#";
 
     private PreferencesService preferencesService = new PreferencesService(PREF_NAME);
 
@@ -23,9 +23,9 @@ public class CampaignStoreService {
     }
 
     public void reset() {
-        int maxStars = getAllStarsWon();
+        long maxStars = getAllScoreWon();
         this.preferencesService.clear();
-        updateAllStarsWon(maxStars);
+        updateAllScoreWon(maxStars);
     }
 
     private String formCampaignLevelKey(CampaignLevel campaignLevelEnum) {
@@ -38,7 +38,7 @@ public class CampaignStoreService {
             int val = preferencesService.getPreferences().getInteger(formCampaignLevelKey(levelEnum), -1);
             if (val != -1) {
                 CampaignStoreLevel level = new CampaignStoreLevel(levelEnum);
-                level.setStarsWon(getStarsWon(levelEnum));
+                level.setScore(getScoreWon(levelEnum));
                 level.setStatus(preferencesService.getPreferences().getInteger(formCampaignLevelStatusKey(levelEnum)));
                 levels.add(level);
             }
@@ -46,12 +46,20 @@ public class CampaignStoreService {
         return levels;
     }
 
+    public void putFreeText(String freeText) {
+        preferencesService.putString(formFreeTextKey(), getFreeText() + TEXT_SPLIT + freeText);
+    }
+
+    public String getFreeText() {
+        return preferencesService.getPreferences().getString(formFreeTextKey(), "");
+    }
+
     public void putQuestionPlayed(String questionId) {
-        preferencesService.putString(formQuestionPlayedKey(), getAllQuestionsPlayed() + QUESTION_SPLIT + questionId);
+        preferencesService.putString(formQuestionPlayedKey(), getAllQuestionsPlayed() + TEXT_SPLIT + questionId);
     }
 
     public boolean isQuestionAlreadyPlayed(String questionId) {
-        return getAllQuestionsPlayed().contains(QUESTION_SPLIT + questionId);
+        return getAllQuestionsPlayed().contains(TEXT_SPLIT + questionId);
     }
 
     public String getAllQuestionsPlayed() {
@@ -66,20 +74,26 @@ public class CampaignStoreService {
         return preferencesService.getPreferences().getInteger(formNrOfQuestionsPlayedKey(), 0);
     }
 
-    public int getAllStarsWon() {
-        return preferencesService.getPreferences().getInteger(formAllStarsWonKey());
+    public long getAllScoreWon() {
+        return preferencesService.getPreferences().getLong(formAllStarsWonKey());
     }
 
-    public void updateAllStarsWon(int starsWon) {
-        preferencesService.putInteger(formAllStarsWonKey(), starsWon);
+    public void updateAllScoreWon(long scoreWon) {
+        preferencesService.putLong(formAllStarsWonKey(), scoreWon);
     }
 
-    public int getStarsWon(CampaignLevel levelEnum) {
-        return preferencesService.getPreferences().getInteger(formCampaignLevelStarsWonKey(levelEnum));
+    public long getScoreWon(CampaignLevel levelEnum) {
+        return preferencesService.getPreferences().getLong(formCampaignLevelScoreWonKey(levelEnum));
     }
 
-    void updateStarsWon(CampaignLevel campaignLevelEnum, int starsWon) {
-        preferencesService.putInteger(formCampaignLevelStarsWonKey(campaignLevelEnum), starsWon);
+    public void levelFinishedCampaign(CampaignLevel campaignLevelEnum, long scoreWon) {
+        updateStatus(campaignLevelEnum, CampaignLevelStatusEnum.FINISHED);
+        updateScoreWon(campaignLevelEnum, scoreWon);
+    }
+
+
+    void updateScoreWon(CampaignLevel campaignLevelEnum, long scoreWon) {
+        preferencesService.putLong(formCampaignLevelScoreWonKey(campaignLevelEnum), scoreWon);
     }
 
     Integer getCrosswordLevel(CampaignLevel campaignLevelEnum) {
@@ -94,6 +108,10 @@ public class CampaignStoreService {
         preferencesService.putInteger(formCampaignLevelStatusKey(campaignLevelEnum), campaignLevelStatusEnum.getStatus());
     }
 
+    private String formFreeTextKey() {
+        return "FreeTextKey";
+    }
+
     private String formQuestionPlayedKey() {
         return "QuestionIdPlayed";
     }
@@ -103,11 +121,11 @@ public class CampaignStoreService {
     }
 
     private String formAllStarsWonKey() {
-        return "AllStarsWon";
+        return "AllScoreWon";
     }
 
-    private String formCampaignLevelStarsWonKey(CampaignLevel campaignLevelEnum) {
-        return formCampaignLevelKey(campaignLevelEnum) + "StarsWon";
+    private String formCampaignLevelScoreWonKey(CampaignLevel campaignLevelEnum) {
+        return formCampaignLevelKey(campaignLevelEnum) + "ScoreWon";
     }
 
     private String formCampaignLevelStatusKey(CampaignLevel campaignLevelEnum) {
