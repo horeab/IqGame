@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 import com.badlogic.gdx.utils.I18NBundle;
 import libgdx.game.Game;
+import sun.net.www.content.image.png;
 
 public enum Resource implements Res {
 
@@ -20,6 +21,7 @@ public enum Resource implements Res {
     btn_campaign_disabled("game/campaign/buttons/btn_campaign_disabled.png", Texture.class),
     btn_current_level_down("game/campaign/buttons/btn_current_level_down.png", Texture.class),
     btn_current_level_up("game/campaign/buttons/btn_current_level_up.png", Texture.class),
+    question_background("game/question_background.png", Texture.class),
 
     labels_cs("labels/labels_cs", I18NBundle.class),
     labels_da("labels/labels_da", I18NBundle.class),
