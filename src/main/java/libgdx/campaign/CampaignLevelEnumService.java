@@ -1,5 +1,6 @@
 package libgdx.campaign;
 
+import libgdx.game.Game;
 import libgdx.implementations.skelgame.SkelGameButtonSkin;
 import libgdx.resources.Res;
 import libgdx.resources.Resource;
@@ -35,10 +36,6 @@ public class CampaignLevelEnumService {
         return getCategory() != null ? new SpecificPropertiesUtils().getQuestionCategoryLabel(getCategory()) : null;
     }
 
-    public Resource getBackgroundTexture() {
-        return EnumUtils.getEnumValue(Resource.class, "campaign_level_" + getDifficulty() + "_background");
-    }
-
     public SkelGameButtonSkin getButtonSkin() {
         return EnumUtils.getEnumValue(SkelGameButtonSkin.class, "CAMPAIGN_LEVEL_" + getCategory());
     }
@@ -64,7 +61,7 @@ public class CampaignLevelEnumService {
         return EnumUtils.getEnumValue(GameTypeStage.class, "CAMPAIGN_LEVEL_" + getDifficulty() + (category != null ? "_" + category : ""));
     }
 
-    private int getDifficulty() {
+    public int getDifficulty() {
         return Integer.valueOf(getSplit(campaignLevel.getName())[1]);
     }
 
@@ -74,7 +71,7 @@ public class CampaignLevelEnumService {
 
 
     public Res getIcon() {
-        return (SpecificResource) EnumUtils.getEnumValue(CampaignGame.getInstance().getSubGameDependencyManager().getSpecificResourceTypeEnum(), "campaign_level_" + getDifficulty() + "_" + getCategory());
+        return (SpecificResource) EnumUtils.getEnumValue(Game.getInstance().getSubGameDependencyManager().getSpecificResourceTypeEnum(), "campaign_level_" + getDifficulty() + "_" + getCategory());
     }
 
     private static String[] getSplit(String name) {
