@@ -1,5 +1,6 @@
 package libgdx.campaign;
 
+import libgdx.controls.button.ButtonSkin;
 import libgdx.game.Game;
 import libgdx.implementations.skelgame.SkelGameButtonSkin;
 import libgdx.resources.Res;
@@ -36,11 +37,11 @@ public class CampaignLevelEnumService {
         return getCategory() != null ? new SpecificPropertiesUtils().getQuestionCategoryLabel(getCategory()) : null;
     }
 
-    public SkelGameButtonSkin getButtonSkin() {
-        return EnumUtils.getEnumValue(SkelGameButtonSkin.class, "CAMPAIGN_LEVEL_" + getCategory());
+    public <T extends Enum & ButtonSkin> T getButtonSkin(Class<T> enumClass) {
+        return getCategory() != null ? EnumUtils.getEnumValue(enumClass, "CAMPAIGN_LEVEL_" + getDifficulty()) : EnumUtils.getEnumValue(enumClass, "CAMPAIGN_LEVEL_WALL");
     }
 
-    public QuestionConfig getQuestionConfig(int nrOfQuestions) {
+    public QuestionConfig getQuestionConfig(int nrOfQuestions, int nrOfHints) {
         QuestionDifficulty difficulty = (QuestionDifficulty) EnumUtils.getEnumValue(CampaignGame.getInstance().getSubGameDependencyManager().getQuestionDifficultyTypeEnum(), "_" + getDifficulty());
         QuestionConfig questionConfig;
         if (getCategory() != null) {
@@ -49,8 +50,13 @@ public class CampaignLevelEnumService {
         } else {
             questionConfig = new QuestionConfig(difficulty);
         }
+        questionConfig.setH(nrOfHints);
         questionConfig.setA(nrOfQuestions);
         return questionConfig;
+    }
+
+    public QuestionConfig getQuestionConfig(int nrOfQuestions) {
+        return getQuestionConfig(nrOfQuestions, 0);
     }
 
     public GameTypeStage getGameTypeStage() {
