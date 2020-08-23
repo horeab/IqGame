@@ -1,7 +1,7 @@
-package libgdx.startgame;
+package libgdx.skelgameimpl.startgame;
 
 import libgdx.constants.GameIdEnum;
-import libgdx.implementations.skelgame.SkelGame;
+import libgdx.skelgameimpl.skelgame.SkelGame;
 import libgdx.utils.startgame.test.DefaultAppInfoService;
 
 public class StartGame {

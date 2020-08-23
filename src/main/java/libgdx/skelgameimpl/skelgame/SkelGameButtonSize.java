@@ -1,4 +1,4 @@
-package libgdx.implementations.skelgame;
+package libgdx.skelgameimpl.skelgame;
 
 import libgdx.resources.dimen.MainDimen;
 

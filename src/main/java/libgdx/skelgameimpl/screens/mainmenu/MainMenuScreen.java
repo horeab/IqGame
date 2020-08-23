@@ -1,4 +1,4 @@
-package libgdx.screens.mainmenu;
+package libgdx.skelgameimpl.screens.mainmenu;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
@@ -15,7 +15,7 @@ import libgdx.controls.label.MyWrappedLabelConfigBuilder;
 import libgdx.game.Game;
 import libgdx.game.ScreenManager;
 import libgdx.graphics.GraphicUtils;
-import libgdx.implementations.skelgame.SkelGameRatingService;
+import libgdx.skelgameimpl.skelgame.SkelGameRatingService;
 import libgdx.resources.FontManager;
 import libgdx.resources.Resource;
 import libgdx.resources.dimen.MainDimen;

@@ -1,8 +1,8 @@
-package libgdx.screens;
+package libgdx.skelgameimpl.screens;
 
 import libgdx.screen.AbstractScreen;
 import libgdx.screen.ScreenType;
-import libgdx.screens.mainmenu.MainMenuScreen;
+import libgdx.skelgameimpl.screens.mainmenu.MainMenuScreen;
 
 public enum ScreenTypeEnum implements ScreenType {
 

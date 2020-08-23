@@ -1,4 +1,4 @@
-package libgdx.implementations.skelgame;
+package libgdx.skelgameimpl.skelgame;
 
 
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;

@@ -1,4 +1,4 @@
-package libgdx.implementations.skelgame;
+package libgdx.skelgameimpl.skelgame;
 
 import libgdx.controls.popup.RatingPopup;
 import libgdx.controls.popup.RatingService;
