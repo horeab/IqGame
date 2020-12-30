@@ -24,7 +24,11 @@ public enum SkelGameLabel implements libgdx.resources.gamelabel.GameLabel {
     l_empty,
     l_reachbudget,
     l_highscorebudget,
-    ;
+    l_sell,
+    l_wood,
+    l_iron,
+    l_gold,
+    l_diamond,;
 
     @Override
     public String getText(Object... params) {
