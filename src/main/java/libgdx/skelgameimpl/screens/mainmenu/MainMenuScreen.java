@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
-
 import libgdx.controls.animations.ActorAnimation;
 import libgdx.controls.button.MyButton;
 import libgdx.controls.button.builders.BackButtonBuilder;
@@ -15,11 +14,11 @@ import libgdx.controls.label.MyWrappedLabelConfigBuilder;
 import libgdx.game.Game;
 import libgdx.game.ScreenManager;
 import libgdx.graphics.GraphicUtils;
-import libgdx.skelgameimpl.skelgame.SkelGameRatingService;
 import libgdx.resources.FontManager;
 import libgdx.resources.Resource;
 import libgdx.resources.dimen.MainDimen;
 import libgdx.screen.AbstractScreen;
+import libgdx.skelgameimpl.skelgame.SkelGameRatingService;
 import libgdx.utils.ScreenDimensionsManager;
 
 public class MainMenuScreen extends AbstractScreen<ScreenManager> {
@@ -47,7 +46,7 @@ public class MainMenuScreen extends AbstractScreen<ScreenManager> {
 
     private void addTitle(Table table) {
         Image titleRaysImage = GraphicUtils.getImage(Resource.title_rays);
-        new ActorAnimation(titleRaysImage, this).animateFastFadeInFadeOut();
+        new ActorAnimation(this).animateFastFadeInFadeOut(titleRaysImage);
         float titleWidth = ScreenDimensionsManager.getScreenWidth();
         float titleHeight = ScreenDimensionsManager.getNewHeightForNewWidth(titleWidth, titleRaysImage.getWidth(), titleRaysImage.getHeight());
         titleRaysImage.setWidth(titleWidth);
