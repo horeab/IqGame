@@ -39,7 +39,7 @@ public class MainMenuScreen extends AbstractScreen<ScreenManager> {
         table.setFillParent(true);
         addTitle(table);
         MyButton startGameBtn = createStartGameBtn();
-        table.add(startGameBtn).height(ScreenDimensionsManager.getScreenHeightValue(13)).width(ScreenDimensionsManager.getScreenWidthValue(70)).padTop(verticalGeneralMarginDimen * 4).row();
+        table.add(startGameBtn).height(ScreenDimensionsManager.getScreenHeight(13)).width(ScreenDimensionsManager.getScreenWidth(70)).padTop(verticalGeneralMarginDimen * 4).row();
         table.add().padTop(verticalGeneralMarginDimen * 17);
         addActor(table);
     }
@@ -51,7 +51,7 @@ public class MainMenuScreen extends AbstractScreen<ScreenManager> {
         float titleHeight = ScreenDimensionsManager.getNewHeightForNewWidth(titleWidth, titleRaysImage.getWidth(), titleRaysImage.getHeight());
         titleRaysImage.setWidth(titleWidth);
         titleRaysImage.setHeight(titleHeight);
-        titleRaysImage.setY(ScreenDimensionsManager.getScreenHeightValue(49));
+        titleRaysImage.setY(ScreenDimensionsManager.getScreenHeight(49));
         addActor(titleRaysImage);
         Stack titleLabel = createTitleLabel();
         table.add(titleLabel)
